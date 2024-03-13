@@ -16,6 +16,7 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="style.css">
     <title>Countries</title>
   </head>
   <body>
@@ -24,22 +25,19 @@
 
       <div class="dropdown">
         <button
-          class="btn btn-secondary dropdown-toggle w-50"
+          class="btn btn-secondary dropdown-toggle w-50 bg-warning text-black fw-bold"
           type="button"
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
           Select a country
         </button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
+        <ul class="dropdown-menu scrollable-menu w-50 " role="menu">
         </ul>
       </div>
 
       <div class="card" style="width: 18rem">
-        <img src="..." class="card-img-top" alt="..." />
+        <img src="./tr-flag.png" class="card-img-top" alt="..." />
         <div class="card-body">
           <h5 class="card-title">Card title</h5>
           <p class="card-text">

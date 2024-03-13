@@ -2,14 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   getCountries();
 });
 
-const dropDown = document.getElementById("countries-dropdown");
-console.log(dropDown)
-
-const selectedCountry = document.getElementById('selectedCountry')
-
-
-
-
+const dropDown = document.querySelector(".dropdown-menu");
 
 const getCountries = async () => {
   const url = "https://restcountries.com/v3/all";
@@ -22,21 +15,7 @@ const getCountries = async () => {
   }
 };
 
-const options = (data) => {
-  const countries = data.map((e) => {
-    const option = new Option(e.name.common, e.ccn3);
-    dropDown.add(option);
-
-  });
-
-   
-
-};
-
-
-
 const getCountriesById = async (code) => {
-
   const url = `https://restcountries.com/v3.1/alpha/${code}`;
   try {
     const res = await fetch(url);
@@ -47,8 +26,12 @@ const getCountriesById = async (code) => {
   }
 };
 
-getCountriesById();
+getCountriesById(112);
 
 
 
-
+const options = (data) => {
+  data.forEach((e) => {
+    dropDown.innerHTML += `<li><a class="dropdown-item" href="#">${e.name.common}</a></li>`;
+  });
+};
