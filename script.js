@@ -16,11 +16,28 @@ const getCountries = async () => {
   }
 };
 
+// const options = (data) => {
+//   data.forEach((e) => {
+//     dropDown.innerHTML += `<li><a class="dropdown-item" href="#" id='${e.ccn3}'>${e.name.common}</a></li>`;
+//   });
+// };
+
+
 const options = (data) => {
-  data.forEach((e) => {
-    dropDown.innerHTML += `<li><a class="dropdown-item" href="#" id='${e.ccn3}'>${e.name.common}</a></li>`;
-  });
-};
+  countryArray = []
+  data.forEach((e)=>{
+    countryArray.push(
+      `<li><a class="dropdown-item" href="#" id='${e.ccn3}'>${e.name.common}</a></li>`,
+    );
+  })
+  console.log(countryArray.sort())
+  countryArray.sort().forEach((e)=>{
+    dropDown.innerHTML += e
+  })
+}
+
+
+
 
 const getCountriesById = async (code) => {
   const url = `https://restcountries.com/v3.1/alpha/${code}`;
@@ -33,15 +50,18 @@ const getCountriesById = async (code) => {
   }
 };
 
-
 const getCountryDetails = (data) => {
   data.forEach((e) => {
+    const currencyArray = Object.values(e.currencies);
+    const languagesArray = Object.values(e.languages);
     countryDetails.innerHTML = `
-    <div class="card m-auto " style="width: 18rem">
-        <img src="${e.flags.png}" class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title">${e.name.common}</h5>
-          <table class='table'>
+    <div class="card m-auto border-0" style="width: 32rem">
+        <img src="${
+          e.flags.png
+        }" class="card-img-top m-auto mt-3" style="width: 18rem" alt="..." />
+        <div class="card-body overflow-auto m-auto" style="width: 28rem" >
+          <h5 class="card-title mb-3">${e.name.common}</h5>
+          <table class='table  table-striped'>
           <tbody>
           <tr>
           <th>Capital:</th>
@@ -53,11 +73,11 @@ const getCountryDetails = (data) => {
           </tr>
           <tr>
           <th>Languages:</th>
-          <td>${e.languages}</td>
+          <td>${languagesArray}</td>
           </tr>
           <tr>
           <th>Borders:</th>
-          <td>${e.borders}</td>
+          <td>${e.borders || "None"}</td>
           </tr>
           <tr>
           <th>Population:</th>
@@ -65,20 +85,20 @@ const getCountryDetails = (data) => {
           </tr>
           <tr>
           <th>Currience:</th>
-          <td>${e.currencies}</td>
+          <td>${currencyArray[0].name}</td>
           </tr>
           </tbody>
           </table>
           
-          
-          <a href="#" class="btn btn-primary">Go somewhere</a>
         </div>
       </div>
     `;
   });
 };
 
-dropDown.addEventListener('click', (e)=>{
-  countryId = e.target.id
+dropDown.addEventListener("click", (e) => {
+  countryId = e.target.id;
   getCountriesById(countryId);
-})
+});
+
+
