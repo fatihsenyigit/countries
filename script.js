@@ -22,22 +22,17 @@ const getCountries = async () => {
 //   });
 // };
 
-
 const options = (data) => {
-  countryArray = []
-  data.forEach((e)=>{
+  countryArray = [];
+  data.forEach((e) => {
     countryArray.push(
       `<li><a class="dropdown-item" href="#" id='${e.ccn3}'>${e.name.common}</a></li>`,
     );
-  })
-  console.log(countryArray.sort())
-  countryArray.sort().forEach((e)=>{
-    dropDown.innerHTML += e
-  })
-}
-
-
-
+  });
+  countryArray.sort().forEach((e) => {
+    dropDown.innerHTML += e;
+  });
+};
 
 const getCountriesById = async (code) => {
   const url = `https://restcountries.com/v3.1/alpha/${code}`;
@@ -89,10 +84,15 @@ const getCountryDetails = (data) => {
           </tr>
           </tbody>
           </table>
-          
+          <button type="button" id='close-btn' class="btn btn-warning">
+  close <span class="badge text-bg-danger">X</span>
+</button>
         </div>
       </div>
     `;
+    document.getElementById("close-btn").addEventListener("click", (e) => {
+      countryDetails.innerHTML = "";
+    });
   });
 };
 
@@ -100,5 +100,3 @@ dropDown.addEventListener("click", (e) => {
   countryId = e.target.id;
   getCountriesById(countryId);
 });
-
-
